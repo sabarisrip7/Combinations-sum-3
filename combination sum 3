@@ -1,0 +1,22 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> res = new ArrayList<>();
+        makeCombination(k,n,1,new ArrayList<>(),0,res);
+        return res;
+    }
+    private void makeCombination(int k,int target,int index,List<Integer> comb,int total,List<List<Integer>> res){
+        if(comb.size() == k && total == target){
+            res.add(new ArrayList<>(comb));
+            return;
+        }
+        if(total > target || comb.size() > k){
+            return;
+        }
+
+        for(int i=index ; i<=9 ; i++){
+            comb.add(i);
+            makeCombination(k,target,i+1,comb,total+i,res);
+            comb.remove(comb.size() - 1);
+        }
+    }
+}
